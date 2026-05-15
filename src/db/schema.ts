@@ -87,3 +87,20 @@ export const reservations = pgTable(
     index("reservations_expires_idx").on(table.expiresAt),
   ]
 );
+
+// ─── Idempotency Keys (for bonus) ──────
+
+export const idempotencyKeys = pgTable(
+  "idempotency_keys",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    key: varchar("key", { length: 255 }).notNull(),
+    endpoint: varchar("endpoint", { length: 100 }).notNull(),
+    responseStatus: integer("response_status").notNull(),
+    responseBody: text("response_body").notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    uniqueIndex("idempotency_key_endpoint_idx").on(table.key, table.endpoint),
+  ]
+);
