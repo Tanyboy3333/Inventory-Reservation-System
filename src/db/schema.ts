@@ -11,7 +11,7 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 
-// ─── Enums ─────
+// ─── Enums ────────────────────────────────────────────────────────────────────
 
 export const reservationStatusEnum = pgEnum("reservation_status", [
   "pending",
@@ -19,7 +19,7 @@ export const reservationStatusEnum = pgEnum("reservation_status", [
   "released",
 ]);
 
-// ─── Warehouses ────
+// ─── Warehouses ───────────────────────────────────────────────────────────────
 
 export const warehouses = pgTable("warehouses", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -28,7 +28,7 @@ export const warehouses = pgTable("warehouses", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// ─── Products ─────
+// ─── Products ─────────────────────────────────────────────────────────────────
 
 export const products = pgTable("products", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -39,7 +39,7 @@ export const products = pgTable("products", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// ─── Inventory (stock per product per warehouse) ──────
+// ─── Inventory (stock per product per warehouse) ─────────────────────────────
 
 export const inventory = pgTable(
   "inventory",
@@ -63,7 +63,7 @@ export const inventory = pgTable(
   ]
 );
 
-// ─── Reservations ─────
+// ─── Reservations ─────────────────────────────────────────────────────────────
 
 export const reservations = pgTable(
   "reservations",
@@ -88,7 +88,7 @@ export const reservations = pgTable(
   ]
 );
 
-// ─── Idempotency Keys (for bonus) ──────
+// ─── Idempotency Keys (for bonus) ────────────────────────────────────────────
 
 export const idempotencyKeys = pgTable(
   "idempotency_keys",
